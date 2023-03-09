@@ -1,56 +1,180 @@
 //Knight or Sorcerer
 //LittleMonster or BigMonster
 
-const defaultCharacter = {
-    name: '',
-    life: 1,
-    maxLife: 1,
-    attack: 0,
-    defense: 0
-}
-
-const createKnight = (name) => {
-    return {
-        ...defaultCharacter,
-        name: name,
-        life: 100,
-        maxLife: 100,
-        attack: 10,
-        defense: 8
-    }
-}
-
-const createSorcerer = (name) => {
-    return {
-        ...defaultCharacter,
-        name: name,
-        life: 50,
-        maxLife: 50,
-        attack: 14,
-        defense: 3
-    }
-}
-
-const createLittleMonster = () => {
-    return {
-        ...defaultCharacter,
-        name: 'Little Monster',
-        life: 40,
-        maxLife: 40,
-        attack: 4,
-        defense: 4
-    }
-}
-
-const createBigMonster = () => {
-    return {
-        ...defaultCharacter,
-        name: 'Big Monster',
+const player1PokemonsList = [
+    {
+        name: 'Pikachu',
         life: 120,
         maxLife: 120,
         attack: 16,
-        defense: 6
+        defense: 6,
+        type: 'eletric'
+    },
+    
+    {
+        name: 'Bulbasaur',
+        life: 120,
+        maxLife: 120,
+        attack: 16,
+        defense: 6,
+        type: 'grass'
+    },
+    
+    {
+        name: 'Charmander',
+        life: 120,
+        maxLife: 120,
+        attack: 16,
+        defense: 6,
+        type: 'fire'
+    },
+
+    {
+        name: 'Squirtle',
+        life: 120,
+        maxLife: 120,
+        attack: 16,
+        defense: 6,
+        type: 'water'
     }
+];
+
+// const defaultCharacter = {
+//     name: '',
+//     life: 1,
+//     maxLife: 1,
+//     attack: 0,
+//     defense: 0
+// }
+
+// const createPikachu = () => {
+//     return {
+//     
+//         name: 'Pikachu',
+//         life: 100,
+//         maxLife: 100,
+//         attack: 10,
+//         defense: 8
+//     }
+// }
+
+// const createBulbasaur = () => {
+//     return {
+//     
+//         name: 'Bulbasaur',
+//         life: 100,
+//         maxLife: 100,
+//         attack: 14,
+//         defense: 3
+//     }
+// }
+
+// const createCharmander = () => {
+//     return {
+//     
+//         name: 'Charmander',
+//         life: 40,
+//         maxLife: 40,
+//         attack: 4,
+//         defense: 4
+//     }
+// }
+
+// const createSquirtle = () => {
+//     return {
+//     
+//         name: 'Squirtle',
+//         life: 120,
+//         maxLife: 120,
+//         attack: 16,
+//         defense: 6
+//     }
+// }
+
+// const createEkans = () => {
+//     return {
+//     
+//         name: 'Ekans',
+//         life: 120,
+//         maxLife: 120,
+//         attack: 16,
+//         defense: 6
+//     }
+// }
+
+// const createHorsea = () => {
+//     return {
+//     
+//         name: 'Horsea',
+//         life: 120,
+//         maxLife: 120,
+//         attack: 16,
+//         defense: 6
+//     }
+// }
+
+// const createBellsprout = () => {
+//     return {
+//     
+//         name: 'Bellsprout',
+//         life: 120,
+//         maxLife: 120,
+//         attack: 16,
+//         defense: 6
+//     }
+// }
+
+// const createSandslash = () => {
+//     return {
+//     
+//         name: 'Sandslash',
+//         life: 120,
+//         maxLife: 120,
+//         attack: 16,
+//         defense: 6
+//     }
+// }
+
+const player2PokemonsList = [
+    {
+        name: 'Ekans',
+        life: 120,
+        maxLife: 120,
+        attack: 16,
+        defense: 6,
+        type: 'poison'
+    },
+    
+    {
+        name: 'Horsea',
+        life: 120,
+        maxLife: 120,
+        attack: 16,
+        defense: 6,
+        type: 'water'
+    },
+    
+    {
+        name: 'Bellsprout',
+        life: 120,
+        maxLife: 120,
+        attack: 16,
+        defense: 6,
+        type: 'grass'
+    },
+
+    {
+        name: 'Sandslash',
+        life: 120,
+        maxLife: 120,
+        attack: 16,
+        defense: 6,
+        type: 'ground'
+    }
+];
+
+const charactersSetter = (player1, player2) => {
+
 }
 
 const stage = {
@@ -60,6 +184,7 @@ const stage = {
     fighter2Element: null,
     /*The declaration of these variables isn't necessary,
     but I'm keeping just to remember that they're the atributes being used in this obj*/
+
 
 
     start(fighter1, fighter2, fighter1Element, fighter2Element) {
@@ -72,6 +197,9 @@ const stage = {
         this.fighter2Element.querySelector('.attackButton').addEventListener('click', ()=> this.doAttack(this.fighter2, this.fighter1));
     
         this.update();
+
+        document.querySelector('.fightArea').style.display = 'flex';
+        document.querySelector('.fightlog').style.display = 'block';
     },
 
     update() {

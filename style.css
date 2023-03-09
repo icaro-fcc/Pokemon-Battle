@@ -2,8 +2,37 @@ body {
     background-color: #333;
 }
 
-.fightarea {
-    display: flex; 
+.choosingArea {
+    display: flex;
+    width: 100%;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+#pikachu {
+    background-image: url('./Images/pikachu.png');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+#ekans {
+    background-image: url('./Images/ekans.png');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.pokeOption {
+    width: 100px;
+    height: 100px;
+    background-color: #999;
+}
+
+.fightArea {
+    display: none; 
     gap: 20px;
 }
 
@@ -26,6 +55,7 @@ body {
 }
 
 .fightlog {
+    display: none;
     margin-top: 40%;
     border: 1px dotted #999;
     height: 200px;
