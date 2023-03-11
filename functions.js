@@ -4,177 +4,117 @@
 const player1PokemonsList = [
     {
         name: 'Pikachu',
-        life: 120,
-        maxLife: 120,
-        attack: 16,
+        life: 100,
+        maxLife: 100,
+        attack: 20,
         defense: 6,
-        type: 'eletric'
+        type: 'eletric',
+        strongAgainst: ['water'],
+        weakAgainst: ['ground', 'grass']
     },
     
     {
         name: 'Bulbasaur',
-        life: 120,
-        maxLife: 120,
+        life: 100,
+        maxLife: 100,
         attack: 16,
         defense: 6,
-        type: 'grass'
+        type: 'grass',
+        strongAgainst: ['ground', 'water'],
+        weakAgainst: ['poison', 'fire']
     },
     
     {
         name: 'Charmander',
-        life: 120,
-        maxLife: 120,
-        attack: 16,
-        defense: 6,
-        type: 'fire'
+        life: 100,
+        maxLife: 100,
+        attack: 18,
+        defense: 5,
+        type: 'fire',
+        strongAgainst: ['poison', 'grass'],
+        weakAgainst: ['ground', 'water']
     },
 
     {
         name: 'Squirtle',
-        life: 120,
-        maxLife: 120,
-        attack: 16,
-        defense: 6,
-        type: 'water'
+        life: 100,
+        maxLife: 100,
+        attack: 17,
+        defense: 7,
+        type: 'water',
+        strongAgainst: ['ground'],
+        weakAgainst: ['grass', 'water']
     }
 ];
 
-// const defaultCharacter = {
-//     name: '',
-//     life: 1,
-//     maxLife: 1,
-//     attack: 0,
-//     defense: 0
-// }
 
-// const createPikachu = () => {
-//     return {
-//     
-//         name: 'Pikachu',
-//         life: 100,
-//         maxLife: 100,
-//         attack: 10,
-//         defense: 8
-//     }
-// }
 
-// const createBulbasaur = () => {
-//     return {
-//     
-//         name: 'Bulbasaur',
-//         life: 100,
-//         maxLife: 100,
-//         attack: 14,
-//         defense: 3
-//     }
-// }
-
-// const createCharmander = () => {
-//     return {
-//     
-//         name: 'Charmander',
-//         life: 40,
-//         maxLife: 40,
-//         attack: 4,
-//         defense: 4
-//     }
-// }
-
-// const createSquirtle = () => {
-//     return {
-//     
-//         name: 'Squirtle',
-//         life: 120,
-//         maxLife: 120,
-//         attack: 16,
-//         defense: 6
-//     }
-// }
-
-// const createEkans = () => {
-//     return {
-//     
-//         name: 'Ekans',
-//         life: 120,
-//         maxLife: 120,
-//         attack: 16,
-//         defense: 6
-//     }
-// }
-
-// const createHorsea = () => {
-//     return {
-//     
-//         name: 'Horsea',
-//         life: 120,
-//         maxLife: 120,
-//         attack: 16,
-//         defense: 6
-//     }
-// }
-
-// const createBellsprout = () => {
-//     return {
-//     
-//         name: 'Bellsprout',
-//         life: 120,
-//         maxLife: 120,
-//         attack: 16,
-//         defense: 6
-//     }
-// }
-
-// const createSandslash = () => {
-//     return {
-//     
-//         name: 'Sandslash',
-//         life: 120,
-//         maxLife: 120,
-//         attack: 16,
-//         defense: 6
-//     }
-// }
+// Enemy Pokémons bellow
 
 const player2PokemonsList = [
     {
         name: 'Ekans',
-        life: 120,
-        maxLife: 120,
+        life: 100,
+        maxLife: 100,
         attack: 16,
-        defense: 6,
+        defense: 4,
         type: 'poison'
     },
     
     {
         name: 'Horsea',
-        life: 120,
-        maxLife: 120,
-        attack: 16,
-        defense: 6,
+        life: 100,
+        maxLife: 100,
+        attack: 17,
+        defense: 3,
         type: 'water'
     },
     
     {
         name: 'Bellsprout',
-        life: 120,
-        maxLife: 120,
-        attack: 16,
-        defense: 6,
+        life: 100,
+        maxLife: 100,
+        attack: 15,
+        defense: 3,
         type: 'grass'
     },
 
     {
-        name: 'Sandslash',
-        life: 120,
-        maxLife: 120,
-        attack: 16,
-        defense: 6,
-        type: 'ground'
+        name: 'Mewtwo',
+        life: 500,
+        maxLife: 500,
+        attack: 28,
+        defense: 10,
+        type: 'normal'
     }
 ];
 
-const charactersSetter = (player1, player2) => {
+const charactersSetter = (player1Index) => {
+        
+        let player2Index = Math.floor((Math.random() * 4));
 
+        let player1 = player1PokemonsList[player1Index];
+        let player2 = player2PokemonsList[player2Index];
+
+        if (player1.strongAgainst.includes(player2.type)) {
+            console.log('Player 1 attack first: ', player1.attack);
+            player1.attack *= 2;
+            console.log('Player1 attack has been increased by 2');
+            console.log('Player 1 attack after: ', player1.attack);
+
+            
+        }
+            
+        else if (player1.weakAgainst.includes(player2.type)) {
+                console.log('Player 2 attack first: ', player2.attack);
+                player2.attack *= 2;
+                console.log('Player2 attack has been increased by 2');
+                console.log('Player 2 attack after: ', player2.attack);
+                
+            }
+                
+        
+        return [player1, player2];
 }
 
 const stage = {
@@ -193,6 +133,9 @@ const stage = {
         this.fighter1Element = fighter1Element;
         this.fighter2Element = fighter2Element;
 
+        this.fighter1Element.querySelector('.fighter-img').style.backgroundImage = `url('./Images/${fighter1.name}.png')`;
+        this.fighter2Element.querySelector('.fighter-img').style.backgroundImage = `url('./Images/${fighter2.name}.png')`;
+
         this.fighter1Element.querySelector('.attackButton').addEventListener('click', ()=> this.doAttack(this.fighter1, this.fighter2));
         this.fighter2Element.querySelector('.attackButton').addEventListener('click', ()=> this.doAttack(this.fighter2, this.fighter1));
     
@@ -200,6 +143,7 @@ const stage = {
 
         document.querySelector('.fightArea').style.display = 'flex';
         document.querySelector('.fightlog').style.display = 'block';
+        document.querySelector('.choosingArea').style.display = 'none';
     },
 
     update() {
@@ -228,6 +172,7 @@ const stage = {
         }
 
         let attackFactor = (Math.random() * 2).toFixed(2);
+        console.log('Attack factor: ', attackFactor);
         let defenseFactor = (Math.random() * 2).toFixed(2);
         //The final attack and defense power can be up to double of themselves
 
