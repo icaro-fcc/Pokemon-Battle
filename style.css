@@ -9,52 +9,13 @@ body {
     margin-bottom: 20px;
 }
 
-#pikachu {
-    background-image: url('./Images/pikachu.png');
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    cursor: pointer;
-}
-
-#bulbasaur {
-    background-image: url('./Images/bulbasaur.png');
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    cursor: pointer;
-}
-
-#charmander {
-    background-image: url('./Images/charmander.png');
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    cursor: pointer;
-}
-
-#squirtle {
-    background-image: url('./Images/squirtle.png');
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    cursor: pointer;
-}
-
-#ekans {
-    background-image: url('./Images/ekans.png');
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    cursor: pointer;
-}
-
 .fighter-img {
     width: 100px;
     height: 100px;
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
+    cursor: pointer;
 }
 
 .fightArea {
