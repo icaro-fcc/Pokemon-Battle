@@ -5,7 +5,7 @@ const defaultPokemonStatus = {
     life: 100,
     maxLife: 100,
     attack: 10,
-    defense: 4
+    defense: 5
 }
 
 const pokemonsList = [
@@ -112,6 +112,7 @@ const stage = {
     fighter2: null,
     fighter1Element: null,
     fighter2Element: null,
+    currentTurn: 'player2',
     /*The declaration of these variables isn't necessary,
     but I'm keeping just to remember that they're the atributes being used in this obj*/
 
@@ -155,10 +156,19 @@ const stage = {
     
         this.update();
 
+        document.querySelector(".battleInfoArea .info").innerHTML = `Select ${this.fighter1.name}'s attack`;
+
         document.querySelector('.fightArea').style.display = 'flex';
         document.querySelector('.battleInfoArea').style.display = 'flex';
         document.querySelector('.choosingArea').style.display = 'none';
         document.querySelector('.p1Moves').style.display = 'flex';
+    },
+
+    playerToggle() {
+        if (this.currentTurn === 'player1')
+            this.currentTurn = 'player2';
+        else
+            this.currentTurn = 'player1';
     },
 
     update() {
@@ -179,10 +189,25 @@ const stage = {
         let fighter2HPBar = this.fighter2Element.querySelector('.bar');
         fighter2HPBar.style.width = `${fighter2PercentageLife}%`;
         this.checkHPBar(fighter2PercentageLife, fighter2HPBar);
+
+        this.playerToggle();
+
+        if (this.fighter1.life > 0 && this.fighter2.life > 0 && this.currentTurn === 'player2')
+            this.doPlayer2Attack();
+        else if (this.fighter1.life <= 0) {
+            console.log('Someone is already dead! The battle is over.');
+            this.showLog(`${this.fighter1.name} is fainted!`, `${this.fighter2.name} won the battle!!`);
+            return;
+        } else if (this.fighter2.life <= 0) {
+            this.showLog(`${this.fighter2.name} is fainted!`, `${this.fighter1.name} won the battle!!`);
+            document.querySelector('.')
+            return;
+            };
+        
     },
 
     checkHPBar(percentage, bar) {
-        if (percentage < 70 && percentage > 20)
+        if (percentage < 60 && percentage > 20)
             bar.style.backgroundColor = 'yellow';
         else if (percentage < 20)
                     bar.style.backgroundColor = 'red';
@@ -190,11 +215,12 @@ const stage = {
 
 
 
-    //Create a function for the player2 uses this function to attack too, right after the player1 attacked (and to check if nobody is dead already first)
     doAttack(attacking, attacked, move) {
         console.log(`${attacking.name} atacou ${attacked.name}`);
         console.log('Move chosen: ', move);
         console.log('Attacked type: ', attacked.type);
+
+        document.querySelector('.p1Moves').style.display = 'none';
 
         if (attacking.life <= 0 || attacked.life <= 0) {
             console.log('Someone is already dead! The battle is over.');
@@ -224,6 +250,12 @@ const stage = {
 
         let damage = Math.round((actualAttack - actualDefense));
 
+        let accuracy = Math.round((Math.random() * 10) + 1);
+        console.log('Accuracy: ', accuracy);
+
+        if (accuracy < 3)
+            damage = 0;
+
         console.log('Attack power: ', actualAttack);
         console.log('Defense power: ', actualDefense);
         console.log('Damage: ', damage);
@@ -246,19 +278,48 @@ const stage = {
 
             console.log(`${attacking.name} hit ${attacked.name} with the damage of ${damage}`);
         }   else {
-            this.showLog(`${attacked.name} conseguiu defender o ataque de ${attacking.name}`);
+            this.showLog(`${attacking.name} used ${move.name}`, `Oops, attack missed!`);
             console.log(`${attacked.name} conseguiu defender`);
         }
 
         this.update();
     },
 
+    doPlayer2Attack() {
+        let player2MoveIndex = Math.round((Math.random() * 1));
+        let player2Move = this.fighter2.moves[player2MoveIndex];
+        console.log('Player 2 move: ', this.fighter2.moves[player2MoveIndex]);
+        setTimeout(() => {
+            this.doAttack(this.fighter2, this.fighter1, player2Move);
+            setTimeout(() => {
+                this.showContinueButton();
+            }, 2500);
+        }, 3000);
+        
+    },
+
     showLog(msg, msg2) {       
         document.querySelector(".battleInfoArea .info").innerHTML = msg;
         document.querySelector(".battleInfoArea .subInfo").innerHTML = '';
-        if (msg2)
-            document.querySelector(".battleInfoArea .subInfo").innerHTML = msg2;
+        if (msg2) {
+            setTimeout(() => {
+                document.querySelector(".battleInfoArea .subInfo").innerHTML = msg2;
+            }, 1500);
+        }
         
-        
+    },
+
+    showContinueButton() {
+        let okButton = document.querySelector(".battleInfoArea .continueButton");
+
+        if (this.fighter1.life > 0 && this.fighter2.life > 0) {
+            okButton.style.display = 'block';
+
+            okButton.addEventListener('click', ()=> {
+                okButton.style.display = 'none';
+                this.showLog(`Select ${this.fighter1.name}'s attack`);
+                document.querySelector('.p1Moves').style.display = 'flex';
+            });
+        };
     }
 };

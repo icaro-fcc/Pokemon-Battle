@@ -1,14 +1,19 @@
-* {
+/* * {
     border: 1px solid cyan;
-}
+} */
 
 body {
     background-color: #333;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .choosingArea {
     display: flex;
-    width: 100%;
+    flex-wrap: wrap;
+    width: 80%;
     gap: 20px;
     margin-bottom: 20px;
 }
@@ -33,6 +38,7 @@ body {
 
 
 .fightArea {
+    width: 60%;
     display: none; 
     gap: 20px;
     flex-direction: column;
@@ -67,28 +73,61 @@ body {
     background-color: green;
     border-radius: 5px;
     width: 10%;
+    transition: all ease-out 1s;
 }
 
 .battleInfoArea {
+    color: white;
+    width: 60vw;
+    padding: 20px;
     margin: 20px;
     display: none;
     border: 1px dotted #999;
-    height: 200px;
+    height: 150px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
+}
+
+.infoArea {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 250px;
+    height: 90%;
+}
+
+.message {
+    font-size: 20px;
+    text-align: center;
+}
+
+.rightSide-infoArea {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.continueButton {
+    display: none;
+    width: 30%;
+    height: 30%;
 }
 
 .p1Moves {
     display: none;
-    width: 30%;
+    width: 100%;
     height: 80%;
     flex-direction: column;
     justify-content: space-around;
+    align-items: center;
 }
 
 .p1Moves button {
-    width: 100%;
+    width: 50%;
     height: 50px;
     
 }
