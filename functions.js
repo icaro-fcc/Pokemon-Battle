@@ -120,63 +120,77 @@ const stage = {
     start(fighter1, fighter2, fighter1Element, fighter2Element) {
         this.fighter1 = fighter1;
         this.fighter1Element = fighter1Element;
-        this.fighter1Move1 = this.fighter1Element.querySelector('.move1');
-        this.fighter1Move2 = this.fighter1Element.querySelector('.move2');
+
+        this.fighter1Move1 = document.querySelector('.p1Moves .move1');
+        this.fighter1Move2 = document.querySelector('.p1Moves .move2');
 
         this.fighter2 = fighter2;        
         this.fighter2Element = fighter2Element;        
-        this.fighter2Move1 = this.fighter2Element.querySelector('.move1');
-        this.fighter2Move2 = this.fighter2Element.querySelector('.move2');
+        // this.fighter2Move1 = this.fighter2Element.querySelector('.move1');
+        // this.fighter2Move2 = this.fighter2Element.querySelector('.move2');
 
 
 
-
-        this.fighter1Element.querySelector('.fighter-img').style.backgroundImage = `url('./Images/${fighter1.name}.png')`;
+        this.fighter1Element.querySelector('.fighter-img').style.backgroundImage = `url('./Images/back/${fighter1.name}.png')`;
         this.fighter1Move1.innerHTML = fighter1.moves[0].name;
         this.fighter1Move2.innerHTML = fighter1.moves[1].name;
         this.fighter1Move1.setAttribute('type', fighter1.moves[0].type);
         this.fighter1Move2.setAttribute('type', fighter1.moves[1].type);
 
-        this.fighter2Element.querySelector('.fighter-img').style.backgroundImage = `url('./Images/${fighter2.name}.png')`;
-        this.fighter2Move1.innerHTML = fighter2.moves[0].name;
-        this.fighter2Move2.innerHTML = fighter2.moves[1].name;
-        this.fighter2Move1.setAttribute('type', fighter2.moves[0].type);
-        this.fighter2Move2.setAttribute('type', fighter2.moves[1].type);
+        this.fighter2Element.querySelector('.fighter-img').style.backgroundImage = `url('./Images/front/${fighter2.name}.png')`;
+        // this.fighter2Move1.innerHTML = fighter2.moves[0].name;
+        // this.fighter2Move2.innerHTML = fighter2.moves[1].name;
+        // this.fighter2Move1.setAttribute('type', fighter2.moves[0].type);
+        // this.fighter2Move2.setAttribute('type', fighter2.moves[1].type);
 
 
-        //Change it here, for the different types of moves...
-        // this.fighter1Element.querySelector('.attackButton').addEventListener('click', ()=> this.doAttack(this.fighter1, this.fighter2));
-        // this.fighter2Element.querySelector('.attackButton').addEventListener('click', ()=> this.doAttack(this.fighter2, this.fighter1));
+
+
 
         this.fighter1Move1.addEventListener('click', ()=> this.doAttack(this.fighter1, this.fighter2, fighter1.moves[0]));
         this.fighter1Move2.addEventListener('click', ()=> this.doAttack(this.fighter1, this.fighter2, fighter1.moves[1]));
 
-        this.fighter2Move1.addEventListener('click', ()=> this.doAttack(this.fighter2, this.fighter1, fighter2.moves[0]));
-        this.fighter2Move2.addEventListener('click', ()=> this.doAttack(this.fighter2, this.fighter1, fighter2.moves[1]));
+        // this.fighter2Move1.addEventListener('click', ()=> this.doAttack(this.fighter2, this.fighter1, fighter2.moves[0]));
+        // this.fighter2Move2.addEventListener('click', ()=> this.doAttack(this.fighter2, this.fighter1, fighter2.moves[1]));
     
         this.update();
 
         document.querySelector('.fightArea').style.display = 'flex';
-        document.querySelector('.fightlog').style.display = 'block';
+        document.querySelector('.battleInfoArea').style.display = 'flex';
         document.querySelector('.choosingArea').style.display = 'none';
+        document.querySelector('.p1Moves').style.display = 'flex';
     },
 
     update() {
         //Fighter1
-        this.fighter1Element.querySelector('.name').innerHTML = `${this.fighter1.name} - ${this.fighter1.life.toFixed(1)} HP`;
+        this.fighter1Element.querySelector('.name').innerHTML = `${this.fighter1.name} - ${Math.round(this.fighter1.life)} HP`;
         
         let fighter1PercentageLife = (this.fighter1.life / this.fighter1.maxLife) * 100;
-        this.fighter1Element.querySelector('.bar').style.width = `${fighter1PercentageLife}%`;
+        let fighter1HPBar = this.fighter1Element.querySelector('.bar');
+        fighter1HPBar.style.width = `${fighter1PercentageLife}%`;
+        this.checkHPBar(fighter1PercentageLife, fighter1HPBar);
         
 
 
         //Fighter2
-        this.fighter2Element.querySelector('.name').innerHTML = `${this.fighter2.name} - ${this.fighter2.life.toFixed(1)} HP`;
+        this.fighter2Element.querySelector('.name').innerHTML = `${this.fighter2.name} - ${Math.round(this.fighter2.life)} HP`;
         
         let fighter2PercentageLife = (this.fighter2.life / this.fighter2.maxLife) * 100;
-        this.fighter2Element.querySelector('.bar').style.width = `${fighter2PercentageLife}%`;
+        let fighter2HPBar = this.fighter2Element.querySelector('.bar');
+        fighter2HPBar.style.width = `${fighter2PercentageLife}%`;
+        this.checkHPBar(fighter2PercentageLife, fighter2HPBar);
     },
 
+    checkHPBar(percentage, bar) {
+        if (percentage < 70 && percentage > 20)
+            bar.style.backgroundColor = 'yellow';
+        else if (percentage < 20)
+                    bar.style.backgroundColor = 'red';
+    },
+
+
+
+    //Create a function for the player2 uses this function to attack too, right after the player1 attacked (and to check if nobody is dead already first)
     doAttack(attacking, attacked, move) {
         console.log(`${attacking.name} atacou ${attacked.name}`);
         console.log('Move chosen: ', move);
@@ -186,10 +200,8 @@ const stage = {
             console.log('Someone is already dead! The battle is over.');
             this.showLog('Someone is already dead! The battle is over.');
             return;
-        }
+        };
 
-        // if (attacking.moves)   check if the attacking.moveChosenStrong includes the attaacked type -> attacking.Attack = attaching.attack * 1.5 (super effective)
-        //else if the attacking.moveChosenWeakness includes the attaacked type -> attacking.Attack = attaching.attack * 0.3 (not very effective)
 
             
 
@@ -203,17 +215,15 @@ const stage = {
         
 
         if (move.strengthness.includes(attacked.type)) {
-            actualAttack = actualAttack * 1.5;
+            actualAttack = actualAttack * 2;
             console.log("It's super effective!!!");
-        }
-            
-        else if (move.weakness.includes(attacked.type)) {
-            actualAttack = actualAttack * 0.5;
+        }   else if (move.weakness.includes(attacked.type)) {
+            actualAttack = actualAttack * 0.8;
             console.log("It's not very effective...");
-        }
-                
+            };  
 
         let damage = Math.round((actualAttack - actualDefense));
+
         console.log('Attack power: ', actualAttack);
         console.log('Defense power: ', actualDefense);
         console.log('Damage: ', damage);
@@ -226,28 +236,29 @@ const stage = {
             /*Checking if the attacked life resulted in a negative number,
             if so, it'll show HP as zero (0) instead of a negative number*/
 
-            this.showLog(`${attacking.name} hit ${attacked.name} with the damage of ${damage}`);
+
+            if (damage > 25)
+                this.showLog(`${attacking.name} used ${move.name}`, `It's super effective!!`);
+            else if (damage < 8)
+                    this.showLog(`${attacking.name} used ${move.name}`, `It's not very effective...`);
+                    else
+                        this.showLog(`${attacking.name} used ${move.name}`);
 
             console.log(`${attacking.name} hit ${attacked.name} with the damage of ${damage}`);
         }   else {
-            this.showLog(`${attacked.name} conseguiu defender`);
+            this.showLog(`${attacked.name} conseguiu defender o ataque de ${attacking.name}`);
             console.log(`${attacked.name} conseguiu defender`);
         }
 
         this.update();
     },
 
-    showLog(msg) {
-        const log = document.createElement("li");
-        const textLog = document.createTextNode(msg);        
-        const logArea = document.querySelector(".fightlog");
-        if (logArea.lastChild.innerText == 'Someone is already dead! The battle is over.')
-            return;
-        else {
-            log.appendChild(textLog);
-            logArea.appendChild(log);
-            logArea.scrollTo(0, document.body.scrollHeight);
-        }
+    showLog(msg, msg2) {       
+        document.querySelector(".battleInfoArea .info").innerHTML = msg;
+        document.querySelector(".battleInfoArea .subInfo").innerHTML = '';
+        if (msg2)
+            document.querySelector(".battleInfoArea .subInfo").innerHTML = msg2;
+        
         
     }
 };

@@ -1,4 +1,4 @@
-const pokeOptions = document.querySelectorAll('.fighter-img');
+const pokeOptions = document.querySelectorAll('.pokeOption');
 
 pokeOptions.forEach((item)=> {
     item.addEventListener('click', (element)=> {

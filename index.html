@@ -10,49 +10,55 @@
 <body>
 
     <div class="choosingArea">
-        <div id="pikachu" class="fighter-img" data-list-number="0" style="background-image: url('./Images/pikachu.png');"></div>
-        <div id="bulbasaur" class="fighter-img" data-list-number="1" style="background-image: url('./Images/bulbasaur.png');"></div>
-        <div id="charmander" class="fighter-img" data-list-number="2" style="background-image: url('./Images/charmander.png');"></div>
-        <div id="squirtle" class="fighter-img" data-list-number="3" style="background-image: url('./Images/squirtle.png');"></div>
-        <div id="ekans" class="fighter-img" data-list-number="4" style="background-image: url('./Images/ekans.png');"></div>
-        <div id="horsea" class="fighter-img" data-list-number="5" style="background-image: url('./Images/horsea.png');"></div>
-        <div id="bellsprout" class="fighter-img" data-list-number="6" style="background-image: url('./Images/bellsprout.png');"></div>
-        <div id="sandslash" class="fighter-img" data-list-number="7" style="background-image: url('./Images/sandslash.png');"></div>
+        <div id="pikachu" class="pokeOption" data-list-number="0" style="background-image: url('./Images/pikachu.png');"></div>
+        <div id="bulbasaur" class="pokeOption" data-list-number="1" style="background-image: url('./Images/bulbasaur.png');"></div>
+        <div id="charmander" class="pokeOption" data-list-number="2" style="background-image: url('./Images/charmander.png');"></div>
+        <div id="squirtle" class="pokeOption" data-list-number="3" style="background-image: url('./Images/squirtle.png');"></div>
+        <div id="ekans" class="pokeOption" data-list-number="4" style="background-image: url('./Images/ekans.png');"></div>
+        <div id="horsea" class="pokeOption" data-list-number="5" style="background-image: url('./Images/horsea.png');"></div>
+        <div id="bellsprout" class="pokeOption" data-list-number="6" style="background-image: url('./Images/bellsprout.png');"></div>
+        <div id="sandslash" class="pokeOption" data-list-number="7" style="background-image: url('./Images/sandslash.png');"></div>
     </div>
     
     <div class="fightArea">
+
+        <!-- Computer -->
+        <div id="monster">
+            
+            <div class="lifebar">
+                <div class="bar"></div>
+                <strong class="name">--</strong>
+            </div>
+            <div class="fighter-img"></div>
+            
+            <!-- <div>
+                <button class="attackButton move1">Atacar</button>
+                <button class="attackButton move2">Atacar</button>
+            </div> -->
+        </div>
 
         <!-- Player -->
         <div id="character">
             <div class="fighter-img"></div>
             <div class="lifebar">
                 <div class="bar"></div>
+                <strong class="name">--</strong>
             </div>
-            <strong class="name">--</strong>
-            <div>
-                <button class="attackButton move1">Atacar</button>
-                <button class="attackButton move2">Atacar</button>
-            </div>
-        </div>
+            
 
-        <!-- Computer -->
-        <div id="monster">
-            <div class="fighter-img"></div>
-            <div class="lifebar">
-                <div class="bar"></div>
-            </div>
-            <strong class="name">--</strong>
-            <div>
-                <button class="attackButton move1">Atacar</button>
-                <button class="attackButton move2">Atacar</button>
-            </div>
         </div>
 
     </div>
 
-    <ul class="fightlog">
-
-    </ul>
+    <div class="battleInfoArea">
+        <div class="info"></div>
+        <div class="subInfo"></div>
+        
+        <div class="p1Moves">
+            <button class="attackButton move1">Atacar</button>
+            <button class="attackButton move2">Atacar</button>
+        </div>
+    </div>
 
     <script src="functions.js"></script>
     <!-- <script src="classes.js"></script> -->
