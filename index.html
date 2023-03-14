@@ -4,69 +4,80 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 <body>
 
-    <div class="choosingArea">
-        <div id="pikachu" class="pokeOption" data-list-number="0" style="background-image: url('./Images/pikachu.png');"></div>
-        <div id="bulbasaur" class="pokeOption" data-list-number="1" style="background-image: url('./Images/bulbasaur.png');"></div>
-        <div id="charmander" class="pokeOption" data-list-number="2" style="background-image: url('./Images/charmander.png');"></div>
-        <div id="squirtle" class="pokeOption" data-list-number="3" style="background-image: url('./Images/squirtle.png');"></div>
-        <div id="ekans" class="pokeOption" data-list-number="4" style="background-image: url('./Images/ekans.png');"></div>
-        <div id="horsea" class="pokeOption" data-list-number="5" style="background-image: url('./Images/horsea.png');"></div>
-        <div id="bellsprout" class="pokeOption" data-list-number="6" style="background-image: url('./Images/bellsprout.png');"></div>
-        <div id="sandslash" class="pokeOption" data-list-number="7" style="background-image: url('./Images/sandslash.png');"></div>
-    </div>
+    <div class="container">
+
     
-    <div class="fightArea">
+        <div class="choosingArea">
+            <!-- <div id="pikachu" class="pokeOption" data-list-number="0" style="background-image: url('./Images/pikachu.png');"></div>
+            <div id="bulbasaur" class="pokeOption" data-list-number="1" style="background-image: url('./Images/bulbasaur.png');"></div>
+            <div id="charmander" class="pokeOption" data-list-number="2" style="background-image: url('./Images/charmander.png');"></div>
+            <div id="squirtle" class="pokeOption" data-list-number="3" style="background-image: url('./Images/squirtle.png');"></div>
+            <div id="ekans" class="pokeOption" data-list-number="4" style="background-image: url('./Images/ekans.png');"></div>
+            <div id="horsea" class="pokeOption" data-list-number="5" style="background-image: url('./Images/horsea.png');"></div>
+            <div id="bellsprout" class="pokeOption" data-list-number="6" style="background-image: url('./Images/bellsprout.png');"></div>
+            <div id="sandslash" class="pokeOption" data-list-number="7" style="background-image: url('./Images/sandslash.png');"></div> -->
+        </div>
+        
+        <div class="fightArea">
 
-        <!-- Computer -->
-        <div id="monster">
-            
-            <div class="lifebar">
-                <div class="bar"></div>
-                <strong class="name">--</strong>
+            <!-- Computer -->
+            <div id="monster">
+                
+                <div class="lifebar">
+                    <div class="bar"></div>
+                    <strong class="name">--</strong>
+                </div>
+                <div class="fighter-img"></div>
+                
+                <!-- <div>
+                    <button class="attackButton move1">Atacar</button>
+                    <button class="attackButton move2">Atacar</button>
+                </div> -->
             </div>
-            <div class="fighter-img"></div>
-            
-            <!-- <div>
-                <button class="attackButton move1">Atacar</button>
-                <button class="attackButton move2">Atacar</button>
-            </div> -->
+
+            <!-- Player -->
+            <div id="character">
+                <div class="fighter-img"></div>
+                <div class="lifebar">
+                    <div class="bar"></div>
+                    <strong class="name">--</strong>
+                </div>
+                
+
+            </div>
+
         </div>
 
-        <!-- Player -->
-        <div id="character">
-            <div class="fighter-img"></div>
-            <div class="lifebar">
-                <div class="bar"></div>
-                <strong class="name">--</strong>
+        <div class="battleInfoArea">
+            <div class="infoArea">
+                <div class="message info"></div>
+                <div class="message subInfo"></div>
             </div>
             
+            <div class="rightSide-infoArea">
+                <button class="continueButton">Ok</button>
 
+                <div class="p1Moves">
+                    <button class="attackButton move1">Atacar</button>
+                    <button class="attackButton move2">Atacar</button>
+                </div>
+
+                <button class="restart">Play again</button>
+            </div>
+            
         </div>
 
     </div>
 
-    <div class="battleInfoArea">
-        <div class="infoArea">
-            <div class="message info"></div>
-            <div class="message subInfo"></div>
-        </div>
-        
-        <div class="rightSide-infoArea">
-            <button class="continueButton">Ok</button>
-
-        <div class="p1Moves">
-            <button class="attackButton move1">Atacar</button>
-            <button class="attackButton move2">Atacar</button>
-        </div>
-        </div>
-        
-    </div>
-
+    <script src="pokemons.js"></script>
     <script src="functions.js"></script>
     <!-- <script src="classes.js"></script> -->
     <script src="script.js"></script>

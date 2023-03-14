@@ -1,94 +1,7 @@
 //Knight or Sorcerer
 //LittleMonster or BigMonster
 
-const defaultPokemonStatus = {
-    life: 100,
-    maxLife: 100,
-    attack: 10,
-    defense: 5
-}
 
-const pokemonsList = [
-    {
-        ...defaultPokemonStatus,
-        name: 'Pikachu',
-        type: 'eletric',
-        moves: [
-            {name: 'thunderbolt', type: 'eletric', strengthness: ['water', 'flying'], weakness: ['ground', 'grass']},
-            {name: 'quick attack', type: 'normal', strengthness: [''], weakness: ['flying']}
-        ]
-    },
-    
-    {
-        ...defaultPokemonStatus,
-        name: 'Bulbasaur',
-        type: 'grass',
-        moves: [
-            {name: 'razor leaf', type: 'grass', strengthness: ['ground', 'water', 'rock'], weakness: ['poison', 'fire', 'bug', 'flying']},
-            {name: 'cut', type: 'normal', strengthness: [''], weakness: ['flying']}
-        ]
-    },
-    
-    {
-        ...defaultPokemonStatus,
-        name: 'Charmander',
-        type: 'fire',
-        moves: [
-            {name: 'flamethrower', type: 'fire', strengthness: ['bug', 'poison', 'grass', 'steel'], weakness: ['ground', 'water', 'rock']},
-            {name: 'slash', type: 'normal', strengthness: [''], weakness: ['flying']}
-        ]
-    },
-
-    {
-        ...defaultPokemonStatus,
-        name: 'Squirtle',
-        type: 'water',
-        moves: [
-            {name: 'surf', type: 'water', strengthness: ['ground', 'fire', 'rock'], weakness: ['grass', 'eletric']},
-            {name: 'body slam', type: 'normal', strengthness: [''], weakness: ['flying']}
-        ]
-    },
-
-    {
-        ...defaultPokemonStatus,
-        name: 'Ekans',
-        type: 'poison',
-        moves: [
-            {name: 'earthquake', type: 'ground', strengthness: ['eletric', 'fire', 'poison', 'rock', 'steel'], weakness: ['grass', 'water', 'ice']},
-            {name: 'acid', type: 'poison', strengthness: ['fairy', 'grass'], weakness: ['ground', 'psychic']}
-        ]
-    },
-    
-    {
-        ...defaultPokemonStatus,
-        name: 'Horsea',
-        type: 'water',
-        moves: [
-            {name: 'hydro pump', type: 'water', strengthness: ['ground', 'fire', 'rock'], weakness: ['grass', 'eletric']},
-            {name: 'ice beam', type: 'ice', strengthness: ['dragon', 'flying', 'grass', 'ground'], weakness: ['fighting', 'fire', 'rock', 'steel']}
-        ]
-    },
-    
-    {
-        ...defaultPokemonStatus,
-        name: 'Bellsprout',
-        type: 'grass',
-        moves: [
-            {name: 'razor leaf', type: 'grass', strengthness: ['ground', 'water', 'rock'], weakness: ['poison', 'fire', 'bug', 'flying']},
-            {name: 'mega drain', type: 'grass', strengthness: ['ground', 'water', 'rock'], weakness: ['poison', 'fire', 'bug', 'flying']}
-        ]
-    },
-
-    {
-        ...defaultPokemonStatus,
-        name: 'Sandslash',
-        type: 'ground',
-        moves: [
-            {name: 'dig', type: 'ground', strengthness: ['eletric', 'fire', 'poison', 'rock', 'steel'], weakness: ['grass', 'water', 'ice']},
-            {name: 'sand attack', type: 'normal', strengthness: [], weakness: ['flying']}
-        ]
-    }
-];
 
 const charactersSetter = (player1Index) => {
 
@@ -96,7 +9,8 @@ const charactersSetter = (player1Index) => {
     let player2;
         
         do {
-            let player2Index = Math.floor((Math.random() * 4));
+            let player2Index = Math.floor((Math.random() * 8));
+            console.log('Pokemon 2 player chosen: ', player2Index)
 
             player1 = pokemonsList[player1Index];
             player2 = pokemonsList[player2Index];     
@@ -132,13 +46,13 @@ const stage = {
 
 
 
-        this.fighter1Element.querySelector('.fighter-img').style.backgroundImage = `url('./Images/back/${fighter1.name}.png')`;
+        this.fighter1Element.querySelector('.fighter-img').style.backgroundImage = `url('./Images/back/${fighter1.name}.gif')`;
         this.fighter1Move1.innerHTML = fighter1.moves[0].name;
         this.fighter1Move2.innerHTML = fighter1.moves[1].name;
         this.fighter1Move1.setAttribute('type', fighter1.moves[0].type);
         this.fighter1Move2.setAttribute('type', fighter1.moves[1].type);
 
-        this.fighter2Element.querySelector('.fighter-img').style.backgroundImage = `url('./Images/front/${fighter2.name}.png')`;
+        this.fighter2Element.querySelector('.fighter-img').style.backgroundImage = `url('./Images/front/${fighter2.name}.gif')`;
         // this.fighter2Move1.innerHTML = fighter2.moves[0].name;
         // this.fighter2Move2.innerHTML = fighter2.moves[1].name;
         // this.fighter2Move1.setAttribute('type', fighter2.moves[0].type);
@@ -195,12 +109,21 @@ const stage = {
         if (this.fighter1.life > 0 && this.fighter2.life > 0 && this.currentTurn === 'player2')
             this.doPlayer2Attack();
         else if (this.fighter1.life <= 0) {
-            console.log('Someone is already dead! The battle is over.');
-            this.showLog(`${this.fighter1.name} is fainted!`, `${this.fighter2.name} won the battle!!`);
+            console.log('Someone is already dead! The battle is over.'); 
+            this.showLog(`${this.fighter1.name} has fainted!`, `${this.fighter2.name} won the battle!!`);
+            this.fighter1Element.querySelector('.fighter-img').style.backgroundImage = `url('./Images/back/${this.fighter1.name}.png')`;
+            this.fighter1Element.querySelector('.fighter-img').style.backgroundSize = '150%';
+            setTimeout(() => {
+                document.querySelector('.restart').style.display = 'block';
+            }, 3000);
             return;
         } else if (this.fighter2.life <= 0) {
-            this.showLog(`${this.fighter2.name} is fainted!`, `${this.fighter1.name} won the battle!!`);
-            document.querySelector('.')
+            this.showLog(`${this.fighter2.name} has fainted!`, `${this.fighter1.name} won the battle!!`);
+            this.fighter2Element.querySelector('.fighter-img').style.backgroundImage = `url('./Images/front/${this.fighter2.name}.png')`;
+            this.fighter2Element.querySelector('.fighter-img').style.backgroundSize = '150%';
+            setTimeout(() => {
+                document.querySelector('.restart').style.display = 'block';
+            }, 3000);
             return;
             };
         
@@ -222,11 +145,11 @@ const stage = {
 
         document.querySelector('.p1Moves').style.display = 'none';
 
-        if (attacking.life <= 0 || attacked.life <= 0) {
-            console.log('Someone is already dead! The battle is over.');
-            this.showLog('Someone is already dead! The battle is over.');
-            return;
-        };
+        // if (attacking.life <= 0 || attacked.life <= 0) {
+        //     console.log('Someone is already dead! The battle is over.');
+        //     this.showLog('Someone is already dead! The battle is over.');
+        //     return;
+        // };
 
 
             
@@ -242,6 +165,12 @@ const stage = {
 
         if (move.strengthness.includes(attacked.type)) {
             actualAttack = actualAttack * 2;
+            
+            let criticalHit = Math.round((Math.random() * 10) + 1);
+
+            if (criticalHit < 2)
+                actualAttack = actualAttack * 2;
+
             console.log("It's super effective!!!");
         }   else if (move.weakness.includes(attacked.type)) {
             actualAttack = actualAttack * 0.8;
@@ -250,8 +179,9 @@ const stage = {
 
         let damage = Math.round((actualAttack - actualDefense));
 
-        let accuracy = Math.round((Math.random() * 10) + 1);
+        let accuracy = Math.floor((Math.random() * 10) + 1);
         console.log('Accuracy: ', accuracy);
+
 
         if (accuracy < 3)
             damage = 0;
@@ -268,13 +198,14 @@ const stage = {
             /*Checking if the attacked life resulted in a negative number,
             if so, it'll show HP as zero (0) instead of a negative number*/
 
-
-            if (damage > 25)
-                this.showLog(`${attacking.name} used ${move.name}`, `It's super effective!!`);
-            else if (damage < 8)
-                    this.showLog(`${attacking.name} used ${move.name}`, `It's not very effective...`);
+            if (damage > 35)
+                this.showLog(`${attacking.name} used ${move.name}`, `Critical hit!!`);
+            else if (damage > 20)
+                    this.showLog(`${attacking.name} used ${move.name}`, `It's super effective!!`);
+                else if (damage <= 5)
+                        this.showLog(`${attacking.name} used ${move.name}`, `It's not very effective...`);
                     else
-                        this.showLog(`${attacking.name} used ${move.name}`);
+                        this.showLog(`${attacking.name} used ${move.name}`);            
 
             console.log(`${attacking.name} hit ${attacked.name} with the damage of ${damage}`);
         }   else {
@@ -286,7 +217,10 @@ const stage = {
     },
 
     doPlayer2Attack() {
-        let player2MoveIndex = Math.round((Math.random() * 1));
+        let player2MoveIndex = Math.random();
+        console.log('Player 2 move index: --------------------------------------------------', player2MoveIndex);
+        player2MoveIndex = Math.round(player2MoveIndex);
+        console.log('Player 2 move index: //////////////////////////////////////', player2MoveIndex)
         let player2Move = this.fighter2.moves[player2MoveIndex];
         console.log('Player 2 move: ', this.fighter2.moves[player2MoveIndex]);
         setTimeout(() => {
@@ -323,3 +257,9 @@ const stage = {
         };
     }
 };
+
+
+
+/*
+Just need to improve the interface... thinking of the responsivity too
+*/
