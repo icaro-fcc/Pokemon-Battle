@@ -9,7 +9,7 @@ const charactersSetter = (player1Index) => {
     let player2;
         
         do {
-            let player2Index = Math.floor((Math.random() * 8));
+            let player2Index = Math.floor((Math.random() * 8) + 1);
             console.log('Pokemon 2 player chosen: ', player2Index)
 
             player1 = pokemonsList[player1Index];
@@ -51,6 +51,8 @@ const stage = {
         this.fighter1Move2.innerHTML = fighter1.moves[1].name;
         this.fighter1Move1.setAttribute('type', fighter1.moves[0].type);
         this.fighter1Move2.setAttribute('type', fighter1.moves[1].type);
+        this.fighter1Move1.style.backgroundColor = `${fighter1.moves[0].color}`;
+        this.fighter1Move2.style.backgroundColor = `${fighter1.moves[1].color}`;
 
         this.fighter2Element.querySelector('.fighter-img').style.backgroundImage = `url('./Images/front/${fighter2.name}.gif')`;
         // this.fighter2Move1.innerHTML = fighter2.moves[0].name;
@@ -76,6 +78,9 @@ const stage = {
         document.querySelector('.battleInfoArea').style.display = 'flex';
         document.querySelector('.choosingArea').style.display = 'none';
         document.querySelector('.p1Moves').style.display = 'flex';
+        let stageBackgroundIndex = Math.floor(Math.random() * 8) + 1;
+        console.log('Background stage: -------------------->>>>> ', stageBackgroundIndex);
+        document.querySelector('.fightArea').style.backgroundImage = `url('./Images/stages/stage${stageBackgroundIndex}.jpg')`;
     },
 
     playerToggle() {
@@ -112,7 +117,7 @@ const stage = {
             console.log('Someone is already dead! The battle is over.'); 
             this.showLog(`${this.fighter1.name} has fainted!`, `${this.fighter2.name} won the battle!!`);
             this.fighter1Element.querySelector('.fighter-img').style.backgroundImage = `url('./Images/back/${this.fighter1.name}.png')`;
-            this.fighter1Element.querySelector('.fighter-img').style.backgroundSize = '150%';
+            this.fighter1Element.querySelector('.fighter-img').style.backgroundSize = '160%';
             setTimeout(() => {
                 document.querySelector('.restart').style.display = 'block';
             }, 3000);
@@ -120,7 +125,7 @@ const stage = {
         } else if (this.fighter2.life <= 0) {
             this.showLog(`${this.fighter2.name} has fainted!`, `${this.fighter1.name} won the battle!!`);
             this.fighter2Element.querySelector('.fighter-img').style.backgroundImage = `url('./Images/front/${this.fighter2.name}.png')`;
-            this.fighter2Element.querySelector('.fighter-img').style.backgroundSize = '150%';
+            this.fighter2Element.querySelector('.fighter-img').style.backgroundSize = '160%';
             setTimeout(() => {
                 document.querySelector('.restart').style.display = 'block';
             }, 3000);
@@ -164,14 +169,18 @@ const stage = {
         
 
         if (move.strengthness.includes(attacked.type)) {
-            actualAttack = actualAttack * 2;
+            actualAttack = actualAttack * 1.5;
+            console.log("It has advantage!!");
             
-            let criticalHit = Math.round((Math.random() * 10) + 1);
+            let criticalHit = Math.floor((Math.random() * 10) + 1);
 
-            if (criticalHit < 2)
-                actualAttack = actualAttack * 2;
+            if (criticalHit == 0) {
+                actualAttack = actualAttack * 2.5;
+                console.log('Critical hit!!!!!!!!!!!!!!');
+            }
+                
 
-            console.log("It's super effective!!!");
+            
         }   else if (move.weakness.includes(attacked.type)) {
             actualAttack = actualAttack * 0.8;
             console.log("It's not very effective...");
@@ -183,7 +192,7 @@ const stage = {
         console.log('Accuracy: ', accuracy);
 
 
-        if (accuracy < 3)
+        if (accuracy < 2)
             damage = 0;
 
         console.log('Attack power: ', actualAttack);
@@ -198,9 +207,9 @@ const stage = {
             /*Checking if the attacked life resulted in a negative number,
             if so, it'll show HP as zero (0) instead of a negative number*/
 
-            if (damage > 35)
+            if (damage > 40)
                 this.showLog(`${attacking.name} used ${move.name}`, `Critical hit!!`);
-            else if (damage > 20)
+            else if (damage > 25)
                     this.showLog(`${attacking.name} used ${move.name}`, `It's super effective!!`);
                 else if (damage <= 5)
                         this.showLog(`${attacking.name} used ${move.name}`, `It's not very effective...`);

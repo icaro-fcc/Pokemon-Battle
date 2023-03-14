@@ -40,6 +40,7 @@ body {
     background-repeat: no-repeat;
     cursor: pointer;
     border: 1px solid #00000000;
+    
 }
 
 .pokeOption:hover {
@@ -51,9 +52,10 @@ body {
     width: 100px;
     height: 100px;
     background-position: center;
-    background-size: 70%;
+    background-size: 80%;
     background-repeat: no-repeat;
     cursor: pointer;
+    
 }
 
 
@@ -66,12 +68,17 @@ body {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    /* background-image: url('./Images/stages/stage1.jpg'); */
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .fightArea .name {
     color: white;
     font-size: 0.9em;
     text-align: center;
+    text-shadow: 1px 1px 1px #000;
 }
 
 #character, #monster {
@@ -168,7 +175,7 @@ body {
     font-size: 0.8em;
     width: 80%;
     height: 50px;
-    
+    background-color: darkslateblue;
 }
 
 .log {
