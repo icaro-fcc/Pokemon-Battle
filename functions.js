@@ -1,5 +1,3 @@
-//Knight or Sorcerer
-//LittleMonster or BigMonster
 
 
 

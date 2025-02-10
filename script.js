@@ -1,11 +1,13 @@
 for (let i = 0; i < pokemonsList.length; i++) {
     let pokeItem = document.createElement('div');
+    let pokeName = pokemonsList[i].name.toUpperCase(); // Fixed Pokemons names
     pokeItem.classList.add('pokeOption');
-    pokeItem.setAttribute('data-list-number', `${i}`);
-    pokeItem.style.backgroundImage = `url('./Images/${pokemonsList[i].name}.png')`
+    pokeItem.setAttribute('data-list-number', i);
+    pokeItem.style.backgroundImage = `url('./Images/${pokeName}.png')`;
     document.querySelector('.choosingArea').appendChild(pokeItem);
     console.log('aaa');
 }
+
 
 
 const pokeOptions = document.querySelectorAll('.pokeOption');
